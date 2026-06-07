@@ -1,493 +1,1034 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIFA WC2026 | Partner Ticket Allocation Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --crimson: #8B0000;
-    --crimson-deep: #5C0000;
-    --crimson-mid: #A50000;
-    --crimson-light: #C41E3A;
-    --gold: #C9A84C;
-    --gold-light: #E0C068;
-    --gray-bg: #ECEEF0;
-    --gray-panel: #F5F6F8;
-    --gray-border: #D0D3D8;
-    --gray-muted: #8A8F9A;
-    --gray-dark: #2C2F36;
-    --white: #FFFFFF;
-    --shadow-card: 0 8px 40px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07);
-    --shadow-inner: inset 0 2px 6px rgba(0,0,0,0.07);
-  }
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   FWC2026 | Partner Hospitality &amp; Ticket Allocation — Internal Portal
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&amp;display=swap" rel="stylesheet"/>
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#C8102E;
+  --red-dark:#9B0020;
+  --red-deeper:#6B0016;
+  --navy:#002B5C;
+  --navy-mid:#003F8A;
+  --gold:#C9A84C;
+  --gold-light:#EAC96A;
+  --off-white:#F4F5F7;
+  --white:#FFFFFF;
+  --gray-100:#F0F1F3;
+  --gray-200:#E2E4E8;
+  --gray-400:#9CA3AF;
+  --gray-600:#4B5563;
+  --gray-800:#1F2937;
+  --text:#111827;
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--off-white);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── TICKER ── */
+.ticker-wrap{background:var(--navy);overflow:hidden;white-space:nowrap;padding:7px 0;border-bottom:2px solid var(--gold)}
+.ticker-inner{display:inline-block;animation:ticker 32s linear infinite}
+.ticker-inner span{font-size:11px;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.7);text-transform:uppercase;padding:0 40px}
+.ticker-inner span b{color:var(--gold-light);font-weight:700}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  body {
-    font-family: 'Barlow', sans-serif;
-    background-color: var(--gray-bg);
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.035) 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.035) 40px);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 32px 16px;
-  }
+/* ── NAV ── */
+nav{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-logo-icon{width:38px;height:38px;background:linear-gradient(145deg,var(--red-dark),var(--red));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 2px 8px rgba(200,16,46,.35)}
+.nav-logo-text{line-height:1}
+.nav-logo-top{font-family:var(--font-display);font-size:18px;letter-spacing:.06em;color:var(--red);line-height:1}
+.nav-logo-sub{font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-400);line-height:1;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:6px;transition:background .15s,color .15s}
+.nav-links a:hover{background:var(--gray-100);color:var(--text)}
+.nav-links a.active{color:var(--red);font-weight:600}
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn-nav-ghost{font-size:13px;font-weight:600;color:var(--gray-600);background:none;border:1.5px solid var(--gray-200);border-radius:7px;padding:7px 14px;cursor:pointer;transition:border-color .15s,color .15s}
+.btn-nav-ghost:hover{border-color:var(--red);color:var(--red)}
+.btn-nav-primary{font-size:13px;font-weight:600;color:var(--white);background:var(--red);border:none;border-radius:7px;padding:8px 16px;cursor:pointer;transition:background .15s;box-shadow:0 2px 8px rgba(200,16,46,.3)}
+.btn-nav-primary:hover{background:var(--red-dark)}
 
-  /* ── Top Banner ── */
-  .top-banner {
-    width: 100%;
-    max-width: 680px;
-    background: var(--crimson-deep);
-    border-radius: 6px 6px 0 0;
-    padding: 9px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .top-banner .banner-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11.5px;
-    font-weight: 600;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
-  }
-  .top-banner .dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #3DCC74;
-    box-shadow: 0 0 0 2px rgba(61,204,116,0.25);
-    flex-shrink: 0;
-  }
-  .top-banner .banner-right {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
+/* ── HERO ── */
+.hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 45%,var(--red-dark) 100%);position:relative;overflow:hidden;padding:72px 24px 64px}
+.hero-bg-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0px,rgba(255,255,255,.03) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0px,rgba(255,255,255,.03) 1px,transparent 1px,transparent 60px);pointer-events:none}
+.hero-glow{position:absolute;top:-80px;right:-80px;width:520px;height:520px;background:radial-gradient(circle,rgba(200,16,46,.25) 0%,transparent 65%);pointer-events:none}
+.hero-glow-2{position:absolute;bottom:-100px;left:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,63,138,.4) 0%,transparent 65%);pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:5px 14px;margin-bottom:20px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+.hero-badge-text{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.hero-title{font-family:var(--font-display);font-size:clamp(52px,7vw,96px);line-height:.95;letter-spacing:.02em;color:var(--white);margin-bottom:8px}
+.hero-title .accent{color:var(--gold-light)}
+.hero-subtitle{font-size:15px;font-weight:400;color:rgba(255,255,255,.55);max-width:560px;line-height:1.6;margin-bottom:36px}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.hero-stat-num{font-family:var(--font-display);font-size:38px;letter-spacing:.02em;color:var(--white);line-height:1}
+.hero-stat-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:2px}
+.hero-stat-divider{width:1px;background:rgba(255,255,255,.1);align-self:stretch}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero-primary{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--white);background:var(--red);border:none;border-radius:8px;padding:14px 28px;cursor:pointer;box-shadow:0 4px 20px rgba(200,16,46,.45);transition:background .15s,transform .1s}
+.btn-hero-primary:hover{background:var(--red-dark);transform:translateY(-1px)}
+.btn-hero-ghost{font-size:14px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;padding:13px 24px;cursor:pointer;transition:background .15s}
+.btn-hero-ghost:hover{background:rgba(255,255,255,.14)}
 
-  /* ── Card ── */
-  .card {
-    width: 100%;
-    max-width: 680px;
-    background: var(--white);
-    box-shadow: var(--shadow-card);
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-  }
+/* ── ALERT BAR ── */
+.alert-bar{background:#FEF3C7;border-bottom:1px solid #FCD34D;padding:10px 24px}
+.alert-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.alert-icon{font-size:15px;flex-shrink:0}
+.alert-text{font-size:12.5px;font-weight:500;color:#92400E}
+.alert-text strong{font-weight:700;color:#78350F}
+.alert-badge{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#FCD34D;color:#78350F;padding:3px 10px;border-radius:4px}
 
-  /* ── Header ── */
-  .card-header {
-    background: linear-gradient(135deg, var(--crimson-deep) 0%, var(--crimson-mid) 60%, var(--crimson-light) 100%);
-    padding: 36px 40px 32px;
-    position: relative;
-    overflow: hidden;
-  }
-  .card-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 80% at 110% 50%, rgba(201,168,76,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at -10% 50%, rgba(255,255,255,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .card-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
-  }
-  .header-eyebrow {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 12px;
-    opacity: 0.9;
-  }
-  .header-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: 0.01em;
-    color: var(--white);
-    line-height: 1.15;
-    margin-bottom: 6px;
-  }
-  .header-title .trophy { margin-right: 10px; font-size: 26px; }
-  .header-subtitle {
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 0.02em;
-  }
-  .header-meta {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .meta-chip {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-  }
-  .meta-chip .chip-icon { font-size: 12px; opacity: 0.8; }
+/* ── MAIN LAYOUT ── */
+.main{max-width:1200px;margin:0 auto;padding:40px 24px 80px;display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start}
 
-  /* ── Warning Banner ── */
-  .warning-bar {
-    background: #FFF8E1;
-    border-top: 3px solid #F5A623;
-    border-bottom: 1px solid #EEDD99;
-    padding: 13px 40px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .warning-bar .warn-icon {
-    font-size: 20px;
-    flex-shrink: 0;
-    line-height: 1;
-  }
-  .warning-bar .warn-text {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: #7A4A00;
-  }
-  .warning-bar .warn-sub {
-    font-family: 'Barlow', sans-serif;
-    font-size: 11.5px;
-    font-weight: 400;
-    color: #9A6800;
-    margin-top: 2px;
-    letter-spacing: 0;
-    text-transform: none;
-  }
+/* ── SECTION HEADERS ── */
+.section-label{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.section-label-line{flex:1;height:1px;background:var(--gray-200)}
+.section-label-text{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-400);white-space:nowrap}
 
-  /* ── Body ── */
-  .card-body { padding: 32px 40px 36px; }
+/* ── MATCH CARDS ── */
+.matches-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.match-card{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:1fr auto 1fr auto;align-items:center;gap:12px;transition:box-shadow .15s,border-color .15s;cursor:pointer;position:relative;overflow:hidden}
+.match-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);opacity:0;transition:opacity .15s}
+.match-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08);border-color:var(--gray-400)}
+.match-card:hover::before{opacity:1}
+.match-card-hot::before{opacity:1;background:var(--gold)}
+.match-card-hot{border-color:#E5D393}
+.match-tag{position:absolute;top:12px;right:14px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--gold-light);color:#78350F;padding:2px 8px;border-radius:3px}
+.match-tag-sold{background:#FEE2E2;color:var(--red-dark)}
+.match-tag-limited{background:#DCFCE7;color:#166534}
+.team-side{display:flex;align-items:center;gap:10px}
+.team-side.right{flex-direction:row-reverse;text-align:right}
+.team-flag{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--gray-100);flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.team-name{font-size:14px;font-weight:600;color:var(--text);line-height:1.2}
+.team-rank{font-size:11px;color:var(--gray-400);margin-top:1px}
+.match-vs{text-align:center}
+.match-vs-text{font-family:var(--font-display);font-size:16px;letter-spacing:.08em;color:var(--gray-400)}
+.match-vs-date{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-top:3px;white-space:nowrap}
+.match-vs-venue{font-size:10px;color:var(--gray-400);margin-top:1px}
+.match-price{text-align:right}
+.match-price-from{font-size:9.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-bottom:2px}
+.match-price-num{font-family:var(--font-display);font-size:22px;letter-spacing:.02em;color:var(--red);line-height:1}
+.match-price-cat{font-size:10px;color:var(--gray-400);margin-top:1px}
+.match-card-phase{padding:12px 20px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.phase-label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.phase-value{font-size:12px;font-weight:700;color:var(--gold-light)}
 
-  .portal-desc {
-    background: var(--gray-panel);
-    border: 1px solid var(--gray-border);
-    border-left: 4px solid var(--crimson);
-    border-radius: 4px;
-    padding: 14px 18px;
-    margin-bottom: 28px;
-  }
-  .portal-desc p {
-    font-size: 13px;
-    color: #4A4F5C;
-    line-height: 1.65;
-    font-weight: 400;
-  }
-  .portal-desc p + p { margin-top: 8px; }
-  .portal-desc strong { color: var(--gray-dark); font-weight: 600; }
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:20px}
+.login-card{background:var(--white);border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.login-card-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:20px 22px;position:relative;overflow:hidden}
+.login-card-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.login-header-title{font-family:var(--font-display);font-size:22px;letter-spacing:.04em;color:var(--white);margin-bottom:3px}
+.login-header-sub{font-size:11.5px;color:rgba(255,255,255,.5);font-weight:400}
+.login-card-body{padding:22px}
+.access-level-picker{display:flex;background:var(--gray-100);border-radius:7px;padding:3px;margin-bottom:18px;gap:3px}
+.access-tab{flex:1;text-align:center;font-size:11.5px;font-weight:600;padding:7px 6px;border-radius:5px;cursor:pointer;color:var(--gray-400);transition:background .15s,color .15s}
+.access-tab.active{background:var(--white);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-600);margin-bottom:6px}
+.form-input-wrap{position:relative}
+.form-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;opacity:.4;pointer-events:none}
+.form-input{width:100%;padding:10px 12px 10px 36px;border:1.5px solid var(--gray-200);border-radius:7px;font-family:var(--font-body);font-size:13.5px;color:var(--text);background:var(--white);transition:border-color .15s;cursor:not-allowed;opacity:.65}
+.form-input::placeholder{color:var(--gray-400)}
+.form-hint{font-size:10.5px;color:var(--gray-400);margin-top:4px;line-height:1.4}
+.btn-login{width:100%;padding:12px;background:linear-gradient(135deg,var(--red-dark),var(--red));border:none;border-radius:7px;color:rgba(255,255,255,.5);font-family:var(--font-body);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:not-allowed;opacity:.7;box-shadow:0 3px 12px rgba(200,16,46,.25);margin-top:6px;position:relative;overflow:hidden}
+.btn-login::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,.05) 6px,rgba(0,0,0,.05) 12px)}
+.maintenance-pill{display:flex;align-items:center;gap:7px;justify-content:center;margin-top:12px;background:var(--gray-100);border:1px dashed var(--gray-200);border-radius:6px;padding:8px 12px}
+.maintenance-pill span{font-size:11px;color:var(--gray-400);font-weight:500}
+.maintenance-pill .pill-badge{background:var(--gray-200);border-radius:3px;padding:1px 7px;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-600)}
+.login-card-footer{border-top:1px solid var(--gray-100);padding:12px 22px;display:flex;align-items:center;justify-content:space-between}
+.login-footer-link{font-size:11.5px;color:var(--gray-400);text-decoration:none;cursor:not-allowed}
+.login-footer-link:hover{color:var(--red)}
+.login-footer-secure{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--gray-400)}
+.lock-green{color:#22C55E;font-size:11px}
 
-  /* ── Divider ── */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 0 0 26px;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gray-border);
-  }
-  .divider-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--gray-muted);
-  }
+/* ── INFO CARDS ── */
+.info-card{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:18px 20px}
+.info-card-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-600);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.info-card-title::after{content:'';flex:1;height:1px;background:var(--gray-100)}
+.venue-list{display:flex;flex-direction:column;gap:10px}
+.venue-item{display:flex;align-items:center;gap:10px}
+.venue-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0}
+.venue-name{font-size:13px;font-weight:500;color:var(--text)}
+.venue-city{font-size:11px;color:var(--gray-400)}
+.venue-cap{margin-left:auto;font-size:11px;font-weight:600;color:var(--gray-600)}
+.tier-table{width:100%;border-collapse:collapse}
+.tier-table th{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);text-align:left;padding:0 0 8px}
+.tier-table td{font-size:12.5px;padding:7px 0;border-top:1px solid var(--gray-100);color:var(--text)}
+.tier-table td:last-child{text-align:right;font-weight:600;color:var(--red)}
+.tier-badge{display:inline-block;background:var(--gray-100);border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-600)}
 
-  /* ── Form ── */
-  .form-group { margin-bottom: 18px; }
-  .form-label {
-    display: block;
-    font-size: 11.5px;
-    font-weight: 600;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--gray-dark);
-    margin-bottom: 7px;
-  }
-  .form-label .label-req {
-    color: var(--crimson);
-    margin-left: 3px;
-    font-size: 13px;
-    line-height: 0;
-    vertical-align: middle;
-  }
-  .input-wrap { position: relative; }
-  .input-icon {
-    position: absolute;
-    left: 13px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 15px;
-    opacity: 0.35;
-    pointer-events: none;
-  }
-  .form-input {
-    width: 100%;
-    padding: 11px 14px 11px 38px;
-    border: 1.5px solid var(--gray-border);
-    border-radius: 5px;
-    font-family: 'Barlow', sans-serif;
-    font-size: 14px;
-    color: var(--gray-dark);
-    background: var(--gray-panel);
-    box-shadow: var(--shadow-inner);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    cursor: not-allowed;
-    opacity: 0.72;
-  }
-  .form-input::placeholder { color: var(--gray-muted); opacity: 0.8; }
+/* ── FOOTER ── */
+footer{background:var(--navy);border-top:3px solid var(--red)}
+.footer-inner{max-width:1200px;margin:0 auto;padding:32px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-left{display:flex;align-items:center;gap:14px}
+.footer-logo{font-family:var(--font-display);font-size:20px;letter-spacing:.06em;color:var(--white)}
+.footer-sep{width:1px;height:24px;background:rgba(255,255,255,.1)}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.35);line-height:1.5}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:11.5px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:rgba(255,255,255,.7)}
+.footer-notice{width:100%;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.6}
 
-  .form-hint {
-    margin-top: 5px;
-    font-size: 11px;
-    color: var(--gray-muted);
-    letter-spacing: 0.02em;
-  }
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>*{animation:fadeUp .5s ease both}
+.hero-badge{animation-delay:.05s}
+.hero-title{animation-delay:.12s}
+.hero-subtitle{animation-delay:.19s}
+.hero-stats{animation-delay:.26s}
+.hero-actions{animation-delay:.33s}
+.match-card{animation:fadeUp .4s ease both}
+.match-card:nth-child(2){animation-delay:.07s}
+.match-card:nth-child(3){animation-delay:.14s}
+.match-card:nth-child(4){animation-delay:.21s}
+.match-card:nth-child(5){animation-delay:.28s}
 
-  .btn-login {
-    width: 100%;
-    margin-top: 8px;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, var(--crimson-deep), var(--crimson-mid));
-    border: none;
-    border-radius: 5px;
-    color: rgba(255,255,255,0.45);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    cursor: not-allowed;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(139,0,0,0.3);
-    opacity: 0.7;
-  }
-  .btn-login::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 8px,
-      rgba(0,0,0,0.04) 8px,
-      rgba(0,0,0,0.04) 16px
-    );
-  }
-
-  /* ── Maintenance Notice ── */
-  .maintenance-notice {
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    padding: 9px 14px;
-    background: #F0F2F5;
-    border: 1px dashed #C0C4CC;
-    border-radius: 4px;
-  }
-  .maintenance-notice .maint-icon { font-size: 13px; opacity: 0.6; }
-  .maintenance-notice span {
-    font-size: 11.5px;
-    color: var(--gray-muted);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-  }
-  .maintenance-notice .maint-badge {
-    background: var(--gray-border);
-    border-radius: 3px;
-    padding: 1px 7px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #6A6F7C;
-  }
-
-  /* ── Footer ── */
-  .card-footer {
-    border-top: 1px solid var(--gray-border);
-    padding: 14px 40px;
-    background: var(--gray-panel);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .footer-left {
-    font-size: 11px;
-    color: var(--gray-muted);
-    letter-spacing: 0.04em;
-  }
-  .footer-right {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: var(--gray-muted);
-    letter-spacing: 0.04em;
-  }
-  .footer-right .lock-icon { font-size: 11px; color: #3DCC74; }
-
-  /* ── Bottom Watermark ── */
-  .page-watermark {
-    margin-top: 18px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(0,0,0,0.28);
-    text-align: center;
-  }
+@media(max-width:800px){
+  .main{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hero-stats{gap:24px}
+}
 </style>
-</head>
-<body>
-
-  <div class="top-banner">
-    <div class="banner-left">
-      <span class="dot"></span>
-      Portal Environment: Production — INTL-ZONE-A
-    </div>
-    <div class="banner-right">Session: Unauthenticated</div>
+ </head>
+ <body>
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+   <div class="ticker-inner">
+    <span>
+     🏆
+     <b>
+      FWC2026 Partner Portal
+     </b>
+     — Phase 4 Allocations Open
+    </span>
+    <span>
+     🌎
+     <b>
+      16 Host Cities
+     </b>
+     · USA · CANADA · MEXICO
+    </span>
+    <span>
+     📅
+     <b>
+      Tournament:
+     </b>
+     June 11 – July 19, 2026
+    </span>
+    <span>
+     🔐
+     <b>
+      Secure Session Required
+     </b>
+     — TLS 1.3 Encrypted
+    </span>
+    <span>
+     🎟️
+     <b>
+      104 Matches Available
+     </b>
+     — Group Stage through Final
+    </span>
+    <span>
+     🏟️
+     <b>
+      MetLife Stadium
+     </b>
+     — Final Venue, East Rutherford NJ
+    </span>
+    <span>
+     🏆
+     <b>
+      FWC2026 Partner Portal
+     </b>
+     — Phase 4 Allocations Open
+    </span>
+    <span>
+     🌎
+     <b>
+      16 Host Cities
+     </b>
+     · USA · CANADA · MEXICO
+    </span>
+    <span>
+     📅
+     <b>
+      Tournament:
+     </b>
+     June 11 – July 19, 2026
+    </span>
+    <span>
+     🔐
+     <b>
+      Secure Session Required
+     </b>
+     — TLS 1.3 Encrypted
+    </span>
+    <span>
+     🎟️
+     <b>
+      104 Matches Available
+     </b>
+     — Group Stage through Final
+    </span>
+    <span>
+     🏟️
+     <b>
+      MetLife Stadium
+     </b>
+     — Final Venue, East Rutherford NJ
+    </span>
+   </div>
   </div>
-
-  <div class="card">
-
-    <!-- Header -->
-    <div class="card-header">
-      <div class="header-eyebrow">Confidential — Authorized Access Only</div>
-      <div class="header-title">
-        <span class="trophy">🏆</span>FIFA World Cup 2026
+  <!-- NAV -->
+  <nav>
+   <div class="nav-inner">
+    <div class="nav-logo">
+     <div class="nav-logo-icon">
+      🏆
+     </div>
+     <div class="nav-logo-text">
+      <div class="nav-logo-top">
+       FWC2026
       </div>
-      <div class="header-subtitle">Partner Ticket Allocation Hub &nbsp;·&nbsp; Internal Operations Portal</div>
-      <div class="header-meta">
-        <div class="meta-chip"><span class="chip-icon">🌎</span> USA · CAN · MEX</div>
-        <div class="meta-chip"><span class="chip-icon">📅</span> Tournament Window: Jun–Jul 2026</div>
-        <div class="meta-chip"><span class="chip-icon">🔒</span> TLS 1.3 Secured</div>
+      <div class="nav-logo-sub">
+       Partner Allocation Hub
       </div>
+     </div>
     </div>
-
-    <!-- Warning Bar -->
-    <div class="warning-bar">
-      <div class="warn-icon">⚠️</div>
-      <div>
-        <div class="warn-text">ACCESS RESTRICTED — Internal Staff &amp; Authorized Partners Only</div>
-        <div class="warn-sub">Unauthorized access attempts are logged, monitored, and subject to legal enforcement under applicable law.</div>
-      </div>
+    <div class="nav-links">
+     <a class="active" href="#">
+      Dashboard
+     </a>
+     <a href="#">
+      Fixtures
+     </a>
+     <a href="#">
+      Hospitality
+     </a>
+     <a href="#">
+      Suite Inventory
+     </a>
+     <a href="#">
+      Reports
+     </a>
+     <a href="#">
+      Support
+     </a>
     </div>
-
-    <!-- Body -->
-    <div class="card-body">
-
-      <div class="portal-desc">
-        <p>This portal is the <strong>official internal system</strong> for managing FIFA World Cup 2026 partner hospitality allocations, including group ticket reserves, luxury suite distributions, and VIP access credential issuance across all 16 host venues.</p>
-        <p>Access is restricted to <strong>FIFA Commercial Partners, Official Suppliers, and credentialed FIFA Staff</strong>. All activity within this system is subject to audit logging and compliance review.</p>
+    <div class="nav-right">
+     <button class="btn-nav-ghost">
+      Register Partner
+     </button>
+     <button class="btn-nav-primary" onclick="document.querySelector('.login-card').scrollIntoView({behavior:'smooth'})">
+      Partner Sign In
+     </button>
+    </div>
+   </div>
+  </nav>
+  <!-- HERO -->
+  <div class="hero">
+   <div class="hero-bg-lines">
+   </div>
+   <div class="hero-glow">
+   </div>
+   <div class="hero-glow-2">
+   </div>
+   <div class="hero-inner">
+    <div class="hero-badge">
+     <div class="hero-badge-dot">
+     </div>
+     <div class="hero-badge-text">
+      Phase 4 · First-Come First-Served · Now Open
+     </div>
+    </div>
+    <div class="hero-title">
+     FIFA WORLD
+     <br/>
+     CUP
+     <span class="accent">
+      2026™
+     </span>
+    </div>
+    <div class="hero-subtitle">
+     Internal Partner Ticket Allocation &amp; Group Hospitality Management System. Authorized access only — manage your group reserves, luxury suite inventory, and VIP credential issuance across all 16 host venues.
+    </div>
+    <div class="hero-stats">
+     <div>
+      <div class="hero-stat-num">
+       104
       </div>
-
-      <div class="divider">
-        <span class="divider-label">Secure Partner Sign-In</span>
+      <div class="hero-stat-label">
+       Total Matches
       </div>
-
-      <!-- Form -->
-      <div class="form-group">
-        <label class="form-label">Partner ID / Email Address <span class="label-req">*</span></label>
-        <div class="input-wrap">
-          <span class="input-icon">🪪</span>
-          <input
-            class="form-input"
-            type="text"
-            placeholder="partner.id@fifa-org.net"
-            disabled
-            autocomplete="off"
-          />
+     </div>
+     <div class="hero-stat-divider">
+     </div>
+     <div>
+      <div class="hero-stat-num">
+       48
+      </div>
+      <div class="hero-stat-label">
+       Nations Competing
+      </div>
+     </div>
+     <div class="hero-stat-divider">
+     </div>
+     <div>
+      <div class="hero-stat-num">
+       16
+      </div>
+      <div class="hero-stat-label">
+       Host Cities
+      </div>
+     </div>
+     <div class="hero-stat-divider">
+     </div>
+     <div>
+      <div class="hero-stat-num">
+       5.3M
+      </div>
+      <div class="hero-stat-label">
+       Total Capacity
+      </div>
+     </div>
+    </div>
+    <div class="hero-actions">
+     <button class="btn-hero-primary" onclick="document.querySelector('.login-card').scrollIntoView({behavior:'smooth'})">
+      🔐 Partner Sign In
+     </button>
+     <button class="btn-hero-ghost">
+      View Allocation Guide ↗
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- ALERT -->
+  <div class="alert-bar">
+   <div class="alert-inner">
+    <span class="alert-icon">
+     ⚠️
+    </span>
+    <span class="alert-text">
+     <strong>
+      RESTRICTED ACCESS:
+     </strong>
+     This portal is exclusively for FIFA Commercial Partners, Official Suppliers &amp; credentialed FIFA Staff. All access attempts are logged and monitored. Unauthorized use is subject to legal enforcement.
+    </span>
+    <span class="alert-badge">
+     Internal Only
+    </span>
+   </div>
+  </div>
+  <!-- MAIN -->
+  <div class="main">
+   <!-- LEFT COLUMN -->
+   <div>
+    <!-- Phase Status -->
+    <div class="match-card-phase">
+     <div>
+      <div class="phase-label">
+       Current Sales Phase
+      </div>
+     </div>
+     <div class="phase-value">
+      Phase 4 · Last-Minute Sales — LIVE ✦
+     </div>
+    </div>
+    <!-- Matches -->
+    <div class="section-label">
+     <span class="section-label-text">
+      Featured Allocation Inventory
+     </span>
+     <div class="section-label-line">
+     </div>
+    </div>
+    <div class="matches-grid">
+     <div class="match-card match-card-hot">
+      <span class="match-tag">
+       🔥 High Demand
+      </span>
+      <div class="team-side">
+       <div class="team-flag">
+        🇺🇸
+       </div>
+       <div>
+        <div class="team-name">
+         United States
         </div>
-        <div class="form-hint">Use your FIFA-issued partner credential or registered corporate email.</div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Secure Access Token <span class="label-req">*</span></label>
-        <div class="input-wrap">
-          <span class="input-icon">🔑</span>
-          <input
-            class="form-input"
-            type="password"
-            placeholder="••••••••••••••••"
-            disabled
-            autocomplete="off"
-          />
+        <div class="team-rank">
+         FIFA #11
         </div>
-        <div class="form-hint">Enter the 24-character token issued by your FIFA Partner Liaison.</div>
+       </div>
       </div>
-
-      <button class="btn-login" disabled>
-        🔐 &nbsp; Authenticate &amp; Access Portal
+      <div class="match-vs">
+       <div class="match-vs-text">
+        VS
+       </div>
+       <div class="match-vs-date">
+        Jun 22 · 15:00 ET
+       </div>
+       <div class="match-vs-venue">
+        MetLife Stadium
+       </div>
+      </div>
+      <div class="team-side right">
+       <div class="team-flag">
+        🇵🇾
+       </div>
+       <div>
+        <div class="team-name">
+         Paraguay
+        </div>
+        <div class="team-rank">
+         FIFA #55
+        </div>
+       </div>
+      </div>
+      <div class="match-price">
+       <div class="match-price-from">
+        From
+       </div>
+       <div class="match-price-num">
+        $1,840
+       </div>
+       <div class="match-price-cat">
+        Cat. 1 · Group
+       </div>
+      </div>
+     </div>
+     <div class="match-card">
+      <span class="match-tag match-tag-limited">
+       ✓ Limited
+      </span>
+      <div class="team-side">
+       <div class="team-flag">
+        🇧🇷
+       </div>
+       <div>
+        <div class="team-name">
+         Brazil
+        </div>
+        <div class="team-rank">
+         FIFA #5
+        </div>
+       </div>
+      </div>
+      <div class="match-vs">
+       <div class="match-vs-text">
+        VS
+       </div>
+       <div class="match-vs-date">
+        Jun 21 · 19:00 ET
+       </div>
+       <div class="match-vs-venue">
+        SoFi Stadium
+       </div>
+      </div>
+      <div class="team-side right">
+       <div class="team-flag">
+        🇲🇦
+       </div>
+       <div>
+        <div class="team-name">
+         Morocco
+        </div>
+        <div class="team-rank">
+         FIFA #14
+        </div>
+       </div>
+      </div>
+      <div class="match-price">
+       <div class="match-price-from">
+        From
+       </div>
+       <div class="match-price-num">
+        $2,290
+       </div>
+       <div class="match-price-cat">
+        Cat. 1 · Suite
+       </div>
+      </div>
+     </div>
+     <div class="match-card">
+      <span class="match-tag match-tag-limited">
+       ✓ Available
+      </span>
+      <div class="team-side">
+       <div class="team-flag">
+        🇩🇪
+       </div>
+       <div>
+        <div class="team-name">
+         Germany
+        </div>
+        <div class="team-rank">
+         FIFA #13
+        </div>
+       </div>
+      </div>
+      <div class="match-vs">
+       <div class="match-vs-text">
+        VS
+       </div>
+       <div class="match-vs-date">
+        Jun 19 · 12:00 ET
+       </div>
+       <div class="match-vs-venue">
+        AT&amp;T Stadium
+       </div>
+      </div>
+      <div class="team-side right">
+       <div class="team-flag">
+        🇨🇼
+       </div>
+       <div>
+        <div class="team-name">
+         Curaçao
+        </div>
+        <div class="team-rank">
+         FIFA #82
+        </div>
+       </div>
+      </div>
+      <div class="match-price">
+       <div class="match-price-from">
+        From
+       </div>
+       <div class="match-price-num">
+        $980
+       </div>
+       <div class="match-price-cat">
+        Cat. 2 · Group
+       </div>
+      </div>
+     </div>
+     <div class="match-card">
+      <span class="match-tag match-tag-sold">
+       Waitlist
+      </span>
+      <div class="team-side">
+       <div class="team-flag">
+        🏴󠁧󠁢󠁥󠁮󠁧󠁿
+       </div>
+       <div>
+        <div class="team-name">
+         England
+        </div>
+        <div class="team-rank">
+         FIFA #4
+        </div>
+       </div>
+      </div>
+      <div class="match-vs">
+       <div class="match-vs-text">
+        VS
+       </div>
+       <div class="match-vs-date">
+        Jun 20 · 19:00 ET
+       </div>
+       <div class="match-vs-venue">
+        Lincoln Financial Field
+       </div>
+      </div>
+      <div class="team-side right">
+       <div class="team-flag">
+        🇭🇷
+       </div>
+       <div>
+        <div class="team-name">
+         Croatia
+        </div>
+        <div class="team-rank">
+         FIFA #10
+        </div>
+       </div>
+      </div>
+      <div class="match-price">
+       <div class="match-price-from">
+        From
+       </div>
+       <div class="match-price-num">
+        $3,100
+       </div>
+       <div class="match-price-cat">
+        Cat. 1 · VIP
+       </div>
+      </div>
+     </div>
+     <div class="match-card match-card-hot">
+      <span class="match-tag">
+       🏆 FINAL
+      </span>
+      <div class="team-side">
+       <div class="team-flag">
+        🏆
+       </div>
+       <div>
+        <div class="team-name">
+         Winner Match 93
+        </div>
+        <div class="team-rank">
+         TBD
+        </div>
+       </div>
+      </div>
+      <div class="match-vs">
+       <div class="match-vs-text">
+        VS
+       </div>
+       <div class="match-vs-date">
+        Jul 19 · 18:00 ET
+       </div>
+       <div class="match-vs-venue">
+        MetLife Stadium, NJ
+       </div>
+      </div>
+      <div class="team-side right">
+       <div class="team-flag">
+        🏆
+       </div>
+       <div>
+        <div class="team-name">
+         Winner Match 94
+        </div>
+        <div class="team-rank">
+         TBD
+        </div>
+       </div>
+      </div>
+      <div class="match-price">
+       <div class="match-price-from">
+        From
+       </div>
+       <div class="match-price-num">
+        $6,730
+       </div>
+       <div class="match-price-cat">
+        Cat. 1 · Partner Reserve
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Tier Table -->
+    <div class="section-label">
+     <span class="section-label-text">
+      Partner Ticket Tier Structure
+     </span>
+     <div class="section-label-line">
+     </div>
+    </div>
+    <div class="info-card" style="margin-bottom:0">
+     <table class="tier-table">
+      <thead>
+       <tr>
+        <th>
+         Category
+        </th>
+        <th>
+         Location
+        </th>
+        <th>
+         Allocation Type
+        </th>
+        <th>
+         Base Price (USD)
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         <span class="tier-badge">
+          Cat. 1
+         </span>
+        </td>
+        <td>
+         Lower Tier · Sideline
+        </td>
+        <td>
+         Partner Reserve · Priority
+        </td>
+        <td>
+         $1,840 – $6,730
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <span class="tier-badge">
+          Cat. 2
+         </span>
+        </td>
+        <td>
+         Lower/Mid Tier
+        </td>
+        <td>
+         Group Block · Standard
+        </td>
+        <td>
+         $980 – $2,200
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <span class="tier-badge">
+          Cat. 3
+         </span>
+        </td>
+        <td>
+         Upper Tier
+        </td>
+        <td>
+         Commercial · Bulk
+        </td>
+        <td>
+         $490 – $980
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <span class="tier-badge">
+          VIP Suite
+         </span>
+        </td>
+        <td>
+         Executive Level
+        </td>
+        <td>
+         Luxury Suite · Full Package
+        </td>
+        <td>
+         $12,500 – $42,000
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+   <!-- SIDEBAR -->
+   <div class="sidebar">
+    <!-- LOGIN CARD -->
+    <div class="login-card">
+     <div class="login-card-header">
+      <div class="login-header-title">
+       Partner Sign In
+      </div>
+      <div class="login-header-sub">
+       FWC2026 Secure Allocation Portal · v4.2.1
+      </div>
+     </div>
+     <div class="login-card-body">
+      <div class="access-level-picker">
+       <div class="access-tab active">
+        FIFA Staff
+       </div>
+       <div class="access-tab">
+        Partner
+       </div>
+       <div class="access-tab">
+        Supplier
+       </div>
+      </div>
+      <div class="form-group">
+       <label class="form-label">
+        Partner ID / Email
+       </label>
+       <div class="form-input-wrap">
+        <span class="form-icon">
+         🪪
+        </span>
+        <input autocomplete="off" class="form-input" disabled="" placeholder="partner@fifa-org.net" type="text"/>
+       </div>
+       <div class="form-hint">
+        Use your FIFA-issued credential or registered corporate email.
+       </div>
+      </div>
+      <div class="form-group">
+       <label class="form-label">
+        Secure Access Token
+       </label>
+       <div class="form-input-wrap">
+        <span class="form-icon">
+         🔑
+        </span>
+        <input autocomplete="off" class="form-input" disabled="" placeholder="24-character token" type="password"/>
+       </div>
+       <div class="form-hint">
+        Issued by your FIFA Partner Liaison. Do not share.
+       </div>
+      </div>
+      <button class="btn-login" disabled="">
+       🔐  Authenticate &amp; Access
       </button>
-
-      <div class="maintenance-notice">
-        <span class="maint-icon">🛠️</span>
-        <span class="maint-badge">System Maintenance</span>
-        <span>Portal Temporarily Read-Only — Authentication suspended until next maintenance window</span>
+      <div class="maintenance-pill">
+       <span class="pill-badge">
+        Maintenance
+       </span>
+       <span>
+        Portal Read-Only — Auth suspended
+       </span>
       </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="card-footer">
-      <div class="footer-left">© 2026 FIFA &amp; WC2026 Organizing Committee. All rights reserved. &nbsp;|&nbsp; v4.2.1-PROD</div>
-      <div class="footer-right">
-        <span class="lock-icon">🔒</span>
-        256-bit AES Encrypted Connection
+     </div>
+     <div class="login-card-footer">
+      <a class="login-footer-link" href="#">
+       Forgot credentials?
+      </a>
+      <div class="login-footer-secure">
+       <span class="lock-green">
+        🔒
+       </span>
+       TLS 1.3
       </div>
+     </div>
     </div>
-
+    <!-- VENUES -->
+    <div class="info-card">
+     <div class="info-card-title">
+      Key Host Venues
+     </div>
+     <div class="venue-list">
+      <div class="venue-item">
+       <div class="venue-dot">
+       </div>
+       <div>
+        <div class="venue-name">
+         MetLife Stadium
+        </div>
+        <div class="venue-city">
+         East Rutherford, NJ ·
+         <b>
+          FINAL
+         </b>
+        </div>
+       </div>
+       <div class="venue-cap">
+        82,500
+       </div>
+      </div>
+      <div class="venue-item">
+       <div class="venue-dot" style="background:var(--navy)">
+       </div>
+       <div>
+        <div class="venue-name">
+         AT&amp;T Stadium
+        </div>
+        <div class="venue-city">
+         Arlington, TX
+        </div>
+       </div>
+       <div class="venue-cap">
+        80,000
+       </div>
+      </div>
+      <div class="venue-item">
+       <div class="venue-dot" style="background:var(--navy)">
+       </div>
+       <div>
+        <div class="venue-name">
+         SoFi Stadium
+        </div>
+        <div class="venue-city">
+         Inglewood, CA
+        </div>
+       </div>
+       <div class="venue-cap">
+        70,240
+       </div>
+      </div>
+      <div class="venue-item">
+       <div class="venue-dot" style="background:var(--navy)">
+       </div>
+       <div>
+        <div class="venue-name">
+         Estadio Azteca
+        </div>
+        <div class="venue-city">
+         Mexico City, MX
+        </div>
+       </div>
+       <div class="venue-cap">
+        87,523
+       </div>
+      </div>
+      <div class="venue-item">
+       <div class="venue-dot" style="background:var(--navy)">
+       </div>
+       <div>
+        <div class="venue-name">
+         BC Place
+        </div>
+        <div class="venue-city">
+         Vancouver, CAN
+        </div>
+       </div>
+       <div class="venue-cap">
+        54,500
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- NOTICE -->
+    <div class="info-card" style="border-left:3px solid var(--gold);background:#FFFDF5">
+     <div class="info-card-title">
+      Partner Notice
+     </div>
+     <p style="font-size:12.5px;color:var(--gray-600);line-height:1.6">
+      All ticket allocations are governed by the
+      <strong>
+       FIFA Partner Agreement §7.4
+      </strong>
+      . Unauthorized redistribution or resale of partner-allocated tickets is prohibited and may result in credential revocation. All portal activity is subject to audit logging under FIFA Compliance Protocol FCP-2026.
+     </p>
+    </div>
+   </div>
   </div>
-
-  <div class="page-watermark">FIFA Internal Systems — Not for Public Distribution</div>
-
-</body>
+  <!-- FOOTER -->
+  <footer>
+   <div class="footer-inner">
+    <div class="footer-left">
+     <div class="footer-logo">
+      FWC2026
+     </div>
+     <div class="footer-sep">
+     </div>
+     <div class="footer-copy">
+      © 2026 FIFA &amp; WC2026 Organizing Committee.
+      <br/>
+      All rights reserved. Internal Use Only.
+     </div>
+    </div>
+    <div class="footer-links">
+     <a href="#">
+      Privacy Policy
+     </a>
+     <a href="#">
+      Terms of Access
+     </a>
+     <a href="#">
+      Partner Guide
+     </a>
+     <a href="#">
+      FIFA.com
+     </a>
+     <a href="#">
+      Support
+     </a>
+    </div>
+    <div class="footer-notice">
+     ⚠️ This portal is restricted to authorized FIFA Commercial Partners, Official Suppliers, and credentialed FIFA Staff only. Unauthorized access is strictly prohibited and will be prosecuted to the fullest extent of applicable law. All sessions are monitored, logged, and subject to compliance review under FIFA Internal Security Protocol ICP-2026-A. If you have reached this page in error, disconnect immediately and contact your FIFA Partner Liaison.
+    </div>
+   </div>
+  </footer>
+ </body>
 </html>
