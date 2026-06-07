@@ -1,1 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA WC2026 | Partner Ticket Allocation Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B0000;
+    --crimson-deep: #5C0000;
+    --crimson-mid: #A50000;
+    --crimson-light: #C41E3A;
+    --gold: #C9A84C;
+    --gold-light: #E0C068;
+    --gray-bg: #ECEEF0;
+    --gray-panel: #F5F6F8;
+    --gray-border: #D0D3D8;
+    --gray-muted: #8A8F9A;
+    --gray-dark: #2C2F36;
+    --white: #FFFFFF;
+    --shadow-card: 0 8px 40px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.07);
+    --shadow-inner: inset 0 2px 6px rgba(0,0,0,0.07);
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background-color: var(--gray-bg);
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.035) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.035) 40px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  /* ── Top Banner ── */
+  .top-banner {
+    width: 100%;
+    max-width: 680px;
+    background: var(--crimson-deep);
+    border-radius: 6px 6px 0 0;
+    padding: 9px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .top-banner .banner-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+  .top-banner .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #3DCC74;
+    box-shadow: 0 0 0 2px rgba(61,204,116,0.25);
+    flex-shrink: 0;
+  }
+  .top-banner .banner-right {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── Card ── */
+  .card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--white);
+    box-shadow: var(--shadow-card);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .card-header {
+    background: linear-gradient(135deg, var(--crimson-deep) 0%, var(--crimson-mid) 60%, var(--crimson-light) 100%);
+    padding: 36px 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 110% 50%, rgba(201,168,76,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at -10% 50%, rgba(255,255,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  }
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .header-title .trophy { margin-right: 10px; font-size: 26px; }
+  .header-subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.02em;
+  }
+  .header-meta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+  .meta-chip .chip-icon { font-size: 12px; opacity: 0.8; }
+
+  /* ── Warning Banner ── */
+  .warning-bar {
+    background: #FFF8E1;
+    border-top: 3px solid #F5A623;
+    border-bottom: 1px solid #EEDD99;
+    padding: 13px 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .warning-bar .warn-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .warning-bar .warn-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #7A4A00;
+  }
+  .warning-bar .warn-sub {
+    font-family: 'Barlow', sans-serif;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: #9A6800;
+    margin-top: 2px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* ── Body ── */
+  .card-body { padding: 32px 40px 36px; }
+
+  .portal-desc {
+    background: var(--gray-panel);
+    border: 1px solid var(--gray-border);
+    border-left: 4px solid var(--crimson);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+  }
+  .portal-desc p {
+    font-size: 13px;
+    color: #4A4F5C;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  .portal-desc p + p { margin-top: 8px; }
+  .portal-desc strong { color: var(--gray-dark); font-weight: 600; }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 26px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-border);
+  }
+  .divider-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--gray-muted);
+  }
+
+  /* ── Form ── */
+  .form-group { margin-bottom: 18px; }
+  .form-label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gray-dark);
+    margin-bottom: 7px;
+  }
+  .form-label .label-req {
+    color: var(--crimson);
+    margin-left: 3px;
+    font-size: 13px;
+    line-height: 0;
+    vertical-align: middle;
+  }
+  .input-wrap { position: relative; }
+  .input-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .form-input {
+    width: 100%;
+    padding: 11px 14px 11px 38px;
+    border: 1.5px solid var(--gray-border);
+    border-radius: 5px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: var(--gray-dark);
+    background: var(--gray-panel);
+    box-shadow: var(--shadow-inner);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: not-allowed;
+    opacity: 0.72;
+  }
+  .form-input::placeholder { color: var(--gray-muted); opacity: 0.8; }
+
+  .form-hint {
+    margin-top: 5px;
+    font-size: 11px;
+    color: var(--gray-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .btn-login {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--crimson-deep), var(--crimson-mid));
+    border: none;
+    border-radius: 5px;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: not-allowed;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(139,0,0,0.3);
+    opacity: 0.7;
+  }
+  .btn-login::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      rgba(0,0,0,0.04) 8px,
+      rgba(0,0,0,0.04) 16px
+    );
+  }
+
+  /* ── Maintenance Notice ── */
+  .maintenance-notice {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 14px;
+    background: #F0F2F5;
+    border: 1px dashed #C0C4CC;
+    border-radius: 4px;
+  }
+  .maintenance-notice .maint-icon { font-size: 13px; opacity: 0.6; }
+  .maintenance-notice span {
+    font-size: 11.5px;
+    color: var(--gray-muted);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .maintenance-notice .maint-badge {
+    background: var(--gray-border);
+    border-radius: 3px;
+    padding: 1px 7px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6A6F7C;
+  }
+
+  /* ── Footer ── */
+  .card-footer {
+    border-top: 1px solid var(--gray-border);
+    padding: 14px 40px;
+    background: var(--gray-panel);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .footer-left {
+    font-size: 11px;
+    color: var(--gray-muted);
+    letter-spacing: 0.04em;
+  }
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--gray-muted);
+    letter-spacing: 0.04em;
+  }
+  .footer-right .lock-icon { font-size: 11px; color: #3DCC74; }
+
+  /* ── Bottom Watermark ── */
+  .page-watermark {
+    margin-top: 18px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.28);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="top-banner">
+    <div class="banner-left">
+      <span class="dot"></span>
+      Portal Environment: Production — INTL-ZONE-A
+    </div>
+    <div class="banner-right">Session: Unauthenticated</div>
+  </div>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="header-eyebrow">Confidential — Authorized Access Only</div>
+      <div class="header-title">
+        <span class="trophy">🏆</span>FIFA World Cup 2026
+      </div>
+      <div class="header-subtitle">Partner Ticket Allocation Hub &nbsp;·&nbsp; Internal Operations Portal</div>
+      <div class="header-meta">
+        <div class="meta-chip"><span class="chip-icon">🌎</span> USA · CAN · MEX</div>
+        <div class="meta-chip"><span class="chip-icon">📅</span> Tournament Window: Jun–Jul 2026</div>
+        <div class="meta-chip"><span class="chip-icon">🔒</span> TLS 1.3 Secured</div>
+      </div>
+    </div>
+
+    <!-- Warning Bar -->
+    <div class="warning-bar">
+      <div class="warn-icon">⚠️</div>
+      <div>
+        <div class="warn-text">ACCESS RESTRICTED — Internal Staff &amp; Authorized Partners Only</div>
+        <div class="warn-sub">Unauthorized access attempts are logged, monitored, and subject to legal enforcement under applicable law.</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+
+      <div class="portal-desc">
+        <p>This portal is the <strong>official internal system</strong> for managing FIFA World Cup 2026 partner hospitality allocations, including group ticket reserves, luxury suite distributions, and VIP access credential issuance across all 16 host venues.</p>
+        <p>Access is restricted to <strong>FIFA Commercial Partners, Official Suppliers, and credentialed FIFA Staff</strong>. All activity within this system is subject to audit logging and compliance review.</p>
+      </div>
+
+      <div class="divider">
+        <span class="divider-label">Secure Partner Sign-In</span>
+      </div>
+
+      <!-- Form -->
+      <div class="form-group">
+        <label class="form-label">Partner ID / Email Address <span class="label-req">*</span></label>
+        <div class="input-wrap">
+          <span class="input-icon">🪪</span>
+          <input
+            class="form-input"
+            type="text"
+            placeholder="partner.id@fifa-org.net"
+            disabled
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-hint">Use your FIFA-issued partner credential or registered corporate email.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Secure Access Token <span class="label-req">*</span></label>
+        <div class="input-wrap">
+          <span class="input-icon">🔑</span>
+          <input
+            class="form-input"
+            type="password"
+            placeholder="••••••••••••••••"
+            disabled
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-hint">Enter the 24-character token issued by your FIFA Partner Liaison.</div>
+      </div>
+
+      <button class="btn-login" disabled>
+        🔐 &nbsp; Authenticate &amp; Access Portal
+      </button>
+
+      <div class="maintenance-notice">
+        <span class="maint-icon">🛠️</span>
+        <span class="maint-badge">System Maintenance</span>
+        <span>Portal Temporarily Read-Only — Authentication suspended until next maintenance window</span>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <div class="footer-left">© 2026 FIFA &amp; WC2026 Organizing Committee. All rights reserved. &nbsp;|&nbsp; v4.2.1-PROD</div>
+      <div class="footer-right">
+        <span class="lock-icon">🔒</span>
+        256-bit AES Encrypted Connection
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-watermark">FIFA Internal Systems — Not for Public Distribution</div>
+
+</body>
+</html>
