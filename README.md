@@ -57,7 +57,11 @@ Below is the data pipeline mapping how an attacker's request is captured and vis
 * `/config` - Contains the anonymized `filebeat.yml` and Nginx server configuration blocks.
 
 ---
-
+### Phase 1: Cloud Infrastructure & Web Server Setup (Completed - June 6)
+* Provisioned an **AWS EC2 (t2.micro)** virtual machine running Ubuntu Linux 22.04 LTS.
+* Hardened access control by restricting SSH administration (Port 22) strictly to my local administrative IP address.
+* Exposed HTTP (Port 80) globally to simulate a public-facing corporate infrastructure.
+* Deployed an **Nginx** web engine and successfully injected a customized, single-line optimized HTML/CSS deception framework mimicking an authentic, high-value FIFA partner credential gateway.,
 ## 💡 What I Learned
 * Hands-on experience navigating and hardening **Linux CLI** environments.
 * Practical understanding of **Log Aggregation** and transforming raw data into actionable security metrics.
