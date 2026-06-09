@@ -1,68 +1,47 @@
-# world-cup-deception-honeypot
-World Cup ticketing honeypot and live Kibana security dashboard tracking real-time malicious traffic and bot behavior
-
-# World Cup Ticket Hub: Deception & Logging Honeypot
+# 🏆 Cloud-Native Global Threat Intelligence Honeypot (FIFA World Cup 2026 Theme)
 
 ## 📌 Project Overview
-During the 2026 World Cup, cybercriminals heavily target soccer fans using fraudulent ticket resale sites and phishing schemes. To analyze this threat landscape, I engineered a "deception application"—a decoy ticketing platform hosted in the cloud. By intentionally exposing this infrastructure to the public internet, I captured, parsed, and analyzed live global malicious traffic and automated bot behavior in real-time.
-
-* **Core Focus:** Cloud Infrastructure, SIEM & Data Logging, Threat Analysis
-* **Tools Used:** AWS (EC2), Linux (Ubuntu), Nginx, Elastic Stack (Elasticsearch, Kibana, Filebeat), Git/GitHub
+Designed, deployed, and monitored a cloud-hosted deception application (honeypot) structured as a high-value internal FIFA Partner Ticket Allocation Hub. By exposing this deceptive application to the public internet, I captured, aggregated, and analyzed live cyber attack vectors, automated web scanners, and malicious traffic from global threat actors using an enterprise-grade SIEM pipeline.
 
 ---
 
-## 🗺️ System Architecture
-Below is the data pipeline mapping how an attacker's request is captured and visualized:
+## 🗺️ Live Threat Intelligence Dashboard
+*Below is a real-time snapshot of malicious traffic targeting the honeypot infrastructure:*
 
-[ Attacker/Bot ] ---> [ AWS EC2 / Nginx Web Server ]
-│ (Generates access.log)
-▼
-[ Filebeat Agent ]
-│ (Ships data logs)
-▼
-[ Elasticsearch ] (Ingests & Indexes)
-│
-▼
-[ Kibana Dashboard ] (Visual Analysis)
+![Threat Intelligence Dashboard](./dashboard-snapshot.png)
 
 ---
 
-## 🛠️ Implementation Steps
-
-### Phase 1: Cloud Infrastructure & Web Server Setup
-* Provisioned an **AWS EC2 (t2.micro)** virtual machine running Ubuntu Linux.
-* Configured AWS Security Groups to allow public HTTP traffic (Port 80) and secure SSH management (Port 22).
-* Deployed an **Nginx** web server and configured a custom HTML front-end imitating a "World Cup Ticket Resale Hub."
-
-### Phase 2: Log Shipping & SIEM Ingestion
-* Installed and configured **Filebeat** on the host server to monitor `/var/log/nginx/access.log`.
-* Built an ingestion pipeline to securely ship unstructured web logs directly into a cloud-hosted **Elasticsearch** cluster.
-
-### Phase 3: Kibana Dashboard & Geolocation Data Engineering
-* Leveraged Elastic’s GeoIP processor to automatically map raw IP addresses to geographic coordinates.
-* Developed a centralized **Kibana Security Dashboard** featuring live attack maps, top targeted URL endpoints, and malicious IP lists.
+## 🛠️ Technology Stack & Architecture
+* **Cloud Infrastructure:** Amazon Web Services (AWS) EC2 (Ubuntu 22.04 LTS), Security Groups (Firewalling)
+* **Deception Layer (Honey-App):** Nginx Web Server, Custom HTML5/CSS3 Responsive Gateway Architecture
+* **Log Pipeline & Collection:** Elastic Agent (x86_64 architecture deployment)
+* **SIEM Analytics & Control Room:** Elastic Cloud, Kibana Data Visualization (GeoIP Mapping, Lens Analytics)
 
 ---
 
-## 📊 Key Security Insights & Findings
-*(Note: Update this section at the end of the summer with your actual data!)*
-* **Total Attacks Logged:** X,XXX requests over 60 days.
-* **Top Origin Countries:** 1. [Country], 2. [Country]
-* **Common Attack Paths:** Automated bots frequently attempted directory traversal looking for `/admin`, `/wp-login.php`, and database backup files.
+## 📊 Phase-by-Phase Implementation
+
+### Phase 1: Cloud Infrastructure Hardening
+* Provisioned a Linux virtual machine in AWS EC2. 
+* Configured AWS Security Groups using the principle of least privilege, locking down administrative SSH access (Port 22) exclusively to my local machine's IP, while globally exposing HTTP (Port 80) to invite threat traffic.
+
+### Phase 2: High-Fidelity Deception Deployment
+* Compiled a highly convincing corporate frontend mimicking an internal FIFA network resource using an inline-optimized, minified asset architecture designed to deploy flawlessly across low-bandwidth terminal environments.
+* Configured Nginx to host the decoy web asset while actively generating continuous logging metrics (`access.log` and `error.log`).
+
+### Phase 3: Telemetry & Ingestion Engineering
+* Deployed an Elastic Agent pipeline on the remote Linux host, matching x86_64 kernel constraints.
+* Built real-time log parsing rules via Kibana Integrations to cleanly extract IP metrics, HTTP response states, and client request targets.
+
+### Phase 4: SOC Analytics Design
+* Developed an interactive SOC Dashboard visualizing metrics critical to security operations:
+  * **Interactive GeoIP Map:** Correlates source IP headers to visual geographic telemetry to locate threat actor origins.
+  * **Top Attempted Endpoints:** Highlights directory brute-forcing behaviors (e.g., automated scripts looking for `/admin`, `/wp-admin`, or configuration assets).
+  * **HTTP Response Code Breakdown:** Audits server status distributions to track successful page deliveries versus forced 404/403 security states.
 
 ---
 
-## 📁 Repository Structure
-* `/src` - Contains the custom HTML/CSS for the decoy World Cup ticketing site.
-* `/config` - Contains the anonymized `filebeat.yml` and Nginx server configuration blocks.
-
----
-### Phase 1: Cloud Infrastructure & Web Server Setup (Completed - June 6)
-* Provisioned an **AWS EC2 (t2.micro)** virtual machine running Ubuntu Linux 22.04 LTS.
-* Hardened access control by restricting SSH administration (Port 22) strictly to my local administrative IP address.
-* Exposed HTTP (Port 80) globally to simulate a public-facing corporate infrastructure.
-* Deployed an **Nginx** web engine and successfully injected a customized, single-line optimized HTML/CSS deception framework mimicking an authentic, high-value FIFA partner credential gateway.,
-## 💡 What I Learned
-* Hands-on experience navigating and hardening **Linux CLI** environments.
-* Practical understanding of **Log Aggregation** and transforming raw data into actionable security metrics.
-* Real-world observation of automated threat actor behavior and reconnaissance tactics.
+## 🔑 Key Security Insights & Takeaways
+* **Automated Internet Noise:** Within hours of exposure, automated botnets and malicious scrapers located the server's public IP address without any active domain marketing, proving the continuous nature of internet-wide scanning.
+* **Directory Brute Forcing:** The bar charts clearly highlight that threat actors heavily prioritize weaponized scanning for common CMS administrative portals and root directories.
