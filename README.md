@@ -8,7 +8,7 @@ Designed, deployed, and monitored a cloud-hosted deception application (honeypot
 ## 🗺️ Live Threat Intelligence Dashboard
 *Below is a real-time snapshot of malicious traffic targeting the honeypot infrastructure:*
 
-![Threat Intelligence Dashboard](./dashboard-snapshot.png)
+![Threat Intelligence Dashboard](./Screenshot 2026-06-09 190253.png)
 
 ---
 
